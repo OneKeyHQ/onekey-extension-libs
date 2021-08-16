@@ -11,6 +11,10 @@
     "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
   "scripts": {
     "prepublishOnly": "yarn build",
     "lint": "eslint --ext js,ts .",
