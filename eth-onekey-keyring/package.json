@@ -1,0 +1,53 @@
+{
+  "name": "@onekeyhq/eth-onekey-keyring",
+  "version": "0.7.0",
+  "description": "A OneKey compatible keyring, for onekey hardware wallets",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint --fix . --ext .js"
+  },
+
+  "keywords": [
+    "ethereum",
+    "keyring",
+    "onekey"
+  ],
+  "license": "ISC",
+  "resolutions": {
+    "mocha/mkdirp": "^0.5.1"
+  },
+  "dependencies": {
+    "@onekeyhq/connect": "8.2.3-extended",
+    "eth-sig-util": "^1.4.2",
+    "ethereumjs-tx": "^1.3.4",
+    "ethereumjs-util": "^7.0.9",
+    "hdkey": "0.8.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.1.2",
+    "chai-spies": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-mocha": "^6.2.2",
+    "mocha": "^5.0.4",
+    "sinon": "^9.2.3"
+  }
+}
