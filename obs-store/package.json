@@ -24,7 +24,7 @@
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
-    "prepublishOnly": "yarn test"
+    "prepublishOnly": "yarn build && yarn test"
   },
   "dependencies": {
     "@onekeyhq/safe-event-emitter": "^2.0.0",

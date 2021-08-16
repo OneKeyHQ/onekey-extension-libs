@@ -21,7 +21,7 @@
     "build": "rm -rf dist/* && tsc",
     "lint": "eslint --ext js,ts .",
     "test": "yarn build && mocha test",
-    "prepublishOnly": "yarn test"
+    "prepublishOnly": "yarn build && yarn test"
   },
   "keywords": [
     "ethereum",
