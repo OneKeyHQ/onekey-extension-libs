@@ -1,0 +1,59 @@
+{
+  "name": "@onekeyhq/json-rpc-engine",
+  "version": "6.1.0",
+  "description": "A tool for processing JSON-RPC messages.",
+  "license": "ISC",
+  "author": "kumavis",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --project .",
+    "lint:eslint": "eslint . --cache --ext js,ts",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '**/*.yml' --single-quote --ignore-path .gitignore",
+    "lint": "yarn lint:eslint && yarn lint:misc --check",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
+    "test": "mocha ./test",
+    "coverage": "nyc --check-coverage yarn test",
+    "prepublishOnly": "yarn && yarn build && yarn coverage"
+  },
+  "dependencies": {
+    "@onekeyhq/safe-event-emitter": "^2.0.0",
+    "eth-rpc-errors": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.7",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-mocha": "^8.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "mocha": "^7.1.1",
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.0",
+    "sinon": "^9.0.2",
+    "typescript": "^4.2.4"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "contributors": [
+    "kumavis <aaron@kumavis.me>",
+    "Erik Marks <rekmarks@protonmail.com>"
+  ]
+}
