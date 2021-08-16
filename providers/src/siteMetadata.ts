@@ -1,4 +1,4 @@
-import { JsonRpcEngine } from 'json-rpc-engine';
+import { JsonRpcEngine } from '@onekeyhq/json-rpc-engine';
 
 import messages from './messages';
 import { ConsoleLike, NOOP } from './utils';

@@ -1,5 +1,5 @@
 import { Duplex } from 'stream';
-import { JsonRpcRequest, JsonRpcResponse } from 'json-rpc-engine';
+import { JsonRpcRequest, JsonRpcResponse } from '@onekeyhq/json-rpc-engine';
 import { ethErrors } from 'eth-rpc-errors';
 import sendSiteMetadata from './siteMetadata';
 import messages from './messages';

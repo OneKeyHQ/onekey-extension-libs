@@ -8,8 +8,8 @@ import {
   JsonRpcVersion,
   JsonRpcSuccess,
   JsonRpcMiddleware,
-} from 'json-rpc-engine';
-import { createStreamMiddleware } from 'json-rpc-middleware-stream';
+} from '@onekeyhq/json-rpc-engine';
+import { createStreamMiddleware } from '@onekeyhq/json-rpc-middleware-stream';
 import ObjectMultiplex from '@onekeyhq/object-multiplex';
 import SafeEventEmitter from '@onekeyhq/safe-event-emitter';
 import dequal from 'fast-deep-equal';

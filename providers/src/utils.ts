@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { JsonRpcMiddleware, PendingJsonRpcResponse } from 'json-rpc-engine';
+import { JsonRpcMiddleware, PendingJsonRpcResponse } from '@onekeyhq/json-rpc-engine';
 import { ethErrors } from 'eth-rpc-errors';
 
 export type Maybe<T> = Partial<T> | null | undefined;
