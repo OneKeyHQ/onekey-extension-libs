@@ -1,9 +1,8 @@
-
 A JS module for tracking Ethereum tokens and their values over time.
 
 ## Installation
 
-`npm install '@onekeyhq/eth-token-tracker'`
+`yarn install '@onekeyhq/eth-token-tracker'`
 
 ## Usage
 
@@ -39,3 +38,8 @@ tokenTracker.add({ address: otherTokenAddress })
 tokenTracker.stop()
 ```
 
+## Running tests
+
+```bash
+yarn test
+```

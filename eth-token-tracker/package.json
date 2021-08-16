@@ -1,8 +1,11 @@
 {
   "name": "@onekeyhq/eth-token-tracker",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "A module for tracking Ethereum token balances over block changes.",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "scripts": {
     "lint": "echo 'Skip'",
     "prepublishOnly": "npm run build",
@@ -18,7 +21,6 @@
     "ethereum",
     "tokens"
   ],
-  "author": "Dan Finlay <dan@danfinlay.com>",
   "license": "ISC",
   "files": [
     "/dist",
