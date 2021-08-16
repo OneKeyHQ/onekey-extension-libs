@@ -1,5 +1,5 @@
 const test = require('tape');
-const { JsonRpcEngine } = require('json-rpc-engine');
+const { JsonRpcEngine } = require('@onekeyhq/json-rpc-engine');
 const { createStreamMiddleware, createEngineStream } = require('../dist');
 
 test('middleware - raw test', (t) => {

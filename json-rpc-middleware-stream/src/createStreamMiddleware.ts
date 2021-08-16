@@ -7,7 +7,7 @@ import {
   JsonRpcMiddleware,
   JsonRpcRequest,
   PendingJsonRpcResponse,
-} from 'json-rpc-engine';
+} from '@onekeyhq/json-rpc-engine';
 
 interface IdMapValue {
   req: JsonRpcRequest<unknown>;

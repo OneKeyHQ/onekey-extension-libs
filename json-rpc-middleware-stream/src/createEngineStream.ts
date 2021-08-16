@@ -1,5 +1,5 @@
 import { Duplex } from 'readable-stream';
-import { JsonRpcEngine, JsonRpcRequest } from 'json-rpc-engine';
+import { JsonRpcEngine, JsonRpcRequest } from '@onekeyhq/json-rpc-engine';
 
 interface EngineStreamOptions {
   engine: JsonRpcEngine;
