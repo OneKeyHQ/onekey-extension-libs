@@ -1,0 +1,43 @@
+{
+  "name": "@onekeyhq/safe-event-emitter",
+  "version": "2.0.0",
+  "description": "An EventEmitter that isolates the emitter from errors in handlers",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.js.map"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "tsc --project .",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.21",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.0",
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {}
+}
