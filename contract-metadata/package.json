@@ -1,0 +1,32 @@
+{
+  "name": "@onekeyhq/contract-metadata",
+  "version": "1.28.0",
+  "description": "A mapping of ethereum contract addresses to broadly accepted icons for those addresses.",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "ethereum",
+    "contract",
+    "icons"
+  ],
+  "author": "Dan Finlay <dan@danfinlay.com>",
+  "license": "ISC",
+  "files": [
+    "index.js",
+    "contract-map.json",
+    "images"
+  ],
+  "devDependencies": {
+    "ethereumjs-util": "^5.1.1",
+    "tape": "^4.6.3"
+  }
+}
