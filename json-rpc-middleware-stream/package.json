@@ -1,0 +1,44 @@
+{
+  "name": "@onekeyhq/json-rpc-middleware-stream",
+  "version": "3.0.0",
+  "description": "A small toolset for streaming JSON-RPC data and matching requests and responses.",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "build": "tsc --project .",
+    "test": "yarn build && node test/index.js",
+    "lint": "eslint . --ext ts,js,json",
+    "lint:fix": "eslint . --ext ts,js,json --fix",
+    "prepublishOnly": "yarn test"
+  },
+  "dependencies": {
+    "@onekeyhq/safe-event-emitter": "^2.0.0",
+    "readable-stream": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/readable-stream": "^2.3.9",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-json": "^2.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "json-rpc-engine": "^6.1.0",
+    "tape": "^5.0.0",
+    "typescript": "^4.1.2"
+  }
+}
