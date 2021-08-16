@@ -1,0 +1,119 @@
+{
+  "name": "@onekeyhq/extension-controllers",
+  "version": "5.1.0",
+  "description": "Collection of platform-agnostic modules for creating secure data models for cryptocurrency wallets",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "lint": "eslint --ext js,ts .",
+    "test": "jest --coverage",
+    "format": "prettier **/*.ts **/*.js --check --ignore-path=.gitignore",
+    "format:fix": "prettier **/*.ts **/*.js --write --ignore-path=.gitignore",
+    "build": "rm -rf dist && tsc",
+    "build:watch": "yarn build && tsc -w",
+    "build:link": "yarn build && cd dist && yarn link && rm -rf node_modules && cd ..",
+    "doc": "typedoc src/ && touch docs/.nojekyll"
+  },
+  "keywords": [
+    "Ethereum"
+  ],
+  "dependencies": {
+    "@onekeyhq/contract-metadata": "^1.28.0",
+    "await-semaphore": "^0.1.3",
+    "eth-ens-namehash": "^2.0.8",
+    "eth-json-rpc-infura": "^5.1.0",
+    "eth-keyring-controller": "^6.1.0",
+    "eth-method-registry": "1.1.0",
+    "eth-phishing-detect": "^1.1.13",
+    "eth-query": "^2.1.2",
+    "eth-rpc-errors": "^4.0.0",
+    "eth-sig-util": "^3.0.0",
+    "ethereumjs-util": "^6.1.0",
+    "ethereumjs-wallet": "^0.6.4",
+    "ethjs-query": "^0.3.8",
+    "human-standard-collectible-abi": "^1.0.2",
+    "human-standard-token-abi": "^2.0.0",
+    "isomorphic-fetch": "^3.0.0",
+    "jsonschema": "^1.2.4",
+    "nanoid": "^3.1.12",
+    "single-call-balance-checker-abi": "^1.0.0",
+    "uuid": "^3.3.2",
+    "web3": "^0.20.7",
+    "web3-provider-engine": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/fetch-mock": "^7.3.1",
+    "@types/jest": "^22.2.3",
+    "@types/node": "^10.1.4",
+    "@types/sinon": "^4.3.3",
+    "@types/web3": "^1.0.6",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "ethjs-provider-http": "^0.1.6",
+    "fetch-mock": "^9.10.7",
+    "jest": "^26.4.2",
+    "jest-environment-jsdom": "^25.0.0",
+    "lint-staged": "^6.1.0",
+    "prettier": "^2.1.1",
+    "sinon": "^7.4.1",
+    "ts-jest": "^26.3.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^4.0.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "json",
+      "node"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "**/*.test.ts",
+      "**/*.test.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "dist/BaseController*",
+      "tests/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "setupFiles": [
+      "./tests/setupTests.ts"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "parser": "typescript",
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --ignore-path=.gitignore --write **/*.ts",
+      "yarn lint",
+      "git add"
+    ]
+  }
+}
