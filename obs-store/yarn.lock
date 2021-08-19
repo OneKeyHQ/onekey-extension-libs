@@ -100,10 +100,10 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
-"@onekeyhq/safe-event-emitter@^2.0.0":
-  version "2.0.0"
-  resolved "https://npm.pkg.github.com/download/@onekeyhq/safe-event-emitter/2.0.0/59b505b4e7289f9cfe6294947542b5e2ec25638709c7cc8d94a7eb6118f14403#0aa7b21ec9751b969fb0a6f43500b3dece15972e"
-  integrity sha512-2fggvk1/QvPd04rlEUCpn9QMCPx8Lr/oyjYaAirXVbrFFzJ9SU7r0CVEfc50w/uGeF4ajWPW9LSR81CvGHtMAw==
+"@onekeyhq/safe-event-emitter@^2.0.1":
+  version "2.0.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/safe-event-emitter/2.0.1/1d44756a93b551a0026feb7d0d27c02442bad0237a49cf6bbf41071590959f6f#70df0795017e684a42d41112ecbfd6413497a206"
+  integrity sha512-Qqi1H7tzF/prQnry+xVoqp5unwrmj8nbKoMHYS0uIovIorbTbdN6aPMADhORN3wBqI1Q16UwarH914vjNZVW3w==
 
 "@types/color-name@^1.1.1":
   version "1.1.1"

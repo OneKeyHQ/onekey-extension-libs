@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/obs-store",
-  "version": "7.0.0",
+  "version": "7.0.2",
   "description": "`ObservableStore` is a synchronous in-memory store for a single value, that you can subscribe to updates for.",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -17,21 +17,20 @@
     "dist/"
   ],
   "scripts": {
+    "prepublishOnly": "yarn build && yarn test",
     "setup": "yarn install && yarn allow-scripts",
     "build": "rimraf dist && tsc --project .",
     "test": "yarn build && tape test/**/*.js",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
-    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
-    "prepublishOnly": "yarn build && yarn test"
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write"
   },
   "dependencies": {
-    "@onekeyhq/safe-event-emitter": "^2.0.0",
+    "@onekeyhq/safe-event-emitter": "^2.0.1",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "@lavamoat/allow-scripts": "^1.0.6",
     "@types/node": "^10.17.42",
     "@types/through2": "^2.0.36",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
@@ -49,10 +48,5 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  },
-  "lavamoat": {
-    "allowScripts": {
-      "@lavamoat/preinstall-always-fail": false
-    }
   }
 }

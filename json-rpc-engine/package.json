@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/json-rpc-engine",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "A tool for processing JSON-RPC messages.",
   "license": "ISC",
   "author": "kumavis",
@@ -22,7 +22,7 @@
     "prepublishOnly": "yarn && yarn build && yarn coverage"
   },
   "dependencies": {
-    "@onekeyhq/safe-event-emitter": "^2.0.0",
+    "@onekeyhq/safe-event-emitter": "^2.0.1",
     "eth-rpc-errors": "^4.0.2"
   },
   "devDependencies": {

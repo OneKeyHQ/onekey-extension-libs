@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/json-rpc-middleware-stream",
-  "version": "3.0.1",
+  "version": "3.0.3",
   "description": "A small toolset for streaming JSON-RPC data and matching requests and responses.",
   "license": "ISC",
   "main": "dist/index.js",
@@ -26,9 +26,9 @@
     "prepublishOnly": "yarn test"
   },
   "dependencies": {
-    "@onekeyhq/safe-event-emitter": "^2.0.0",
-    "readable-stream": "^2.3.3",
-    "@onekeyhq/json-rpc-engine": "^6.1.0"
+    "@onekeyhq/safe-event-emitter": "^2.0.1",
+    "@onekeyhq/json-rpc-engine": "^6.1.1",
+    "readable-stream": "^2.3.3"
   },
   "devDependencies": {
     "@types/readable-stream": "^2.3.9",
