@@ -1,0 +1,54 @@
+{
+  "name": "@onekeyhq/eth-keyring-controller",
+  "version": "6.1.0",
+  "description": "A module for managing various keyrings of Ethereum accounts, encrypting them, and using them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 10000 --require test/helper.js test/index.js",
+    "lint": "eslint . --ext js,json",
+    "lint:fix": "eslint . --ext js,json --fix"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneKeyHQ/onekey-extension-libs.git"
+  },
+  "keywords": [
+    "ethereum",
+    "accounts",
+    "keys"
+  ],
+  "author": "Dan Finlay <dan@danfinlay.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "clone": "^2.1.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-json": "^2.1.1",
+    "eslint-plugin-mocha": "^6.0.0",
+    "ethereumjs-wallet": "^0.6.3",
+    "jsdom": "^11.12.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^7.1.2",
+    "polyfill-crypto.getrandomvalues": "^1.0.0",
+    "sinon": "^7.2.7"
+  },
+  "dependencies": {
+    "bip39": "^2.4.0",
+    "bluebird": "^3.5.0",
+    "browser-passworder": "^2.0.3",
+    "eth-hd-keyring": "^3.5.0",
+    "eth-sig-util": "^1.4.0",
+    "eth-simple-keyring": "^3.5.0",
+    "ethereumjs-util": "^5.1.2",
+    "loglevel": "^1.5.0",
+    "obs-store": "^4.0.3"
+  },
+  "files": [
+    "index.js"
+  ]
+}
