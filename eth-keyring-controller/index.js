@@ -584,6 +584,9 @@ class KeyringController extends EventEmitter {
     const { type, data } = serialized;
 
     const Keyring = this.getKeyringClassForType(type);
+    if (!Keyring) {
+      return null;
+    }
     const keyring = new Keyring();
     await keyring.deserialize(data);
     // getAccounts also validates the accounts for some keyrings
@@ -734,6 +737,30 @@ class KeyringController extends EventEmitter {
   setUnlocked() {
     this.memStore.updateState({ isUnlocked: true });
     this.emit('unlock');
+  }
+
+  changePassword(oldPassword, password) {
+    const ensureKeyringsExists = () => {
+      if (!this.keyrings || !this.keyrings.length) {
+        throw new Error('Keyrings is empty, password change is not allowed.');
+      }
+    };
+
+    if (!password) {
+      throw new Error('New password can not be empty');
+    }
+    ensureKeyringsExists();
+
+    return this.verifyPassword(oldPassword)
+      .then(() => {
+        ensureKeyringsExists();
+        // should return persistAllKeyrings, otherwise new password will lost
+        return this.persistAllKeyrings(password);
+      })
+      .then(this.setUnlocked.bind(this))
+      .then(this.fullUpdate.bind(this))
+      .then(this.setLocked.bind(this))
+      .then(() => true);
   }
 }
 
