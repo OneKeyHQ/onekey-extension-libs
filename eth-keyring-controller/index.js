@@ -524,10 +524,16 @@ class KeyringController extends EventEmitter {
       }),
     )
       .then((serializedKeyrings) => {
-        return this.encryptor.encrypt(this.password, serializedKeyrings);
+        if (this.password) {
+          return this.encryptor.encrypt(this.password, serializedKeyrings);
+        } else {
+          return '';
+        }
       })
       .then((encryptedString) => {
-        this.store.updateState({ vault: encryptedString });
+        if (encryptedString) {
+          this.store.updateState({ vault: encryptedString });
+        }
         return true;
       });
   }
