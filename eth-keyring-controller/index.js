@@ -1,21 +1,17 @@
+const { EventEmitter } = require('events');
+const log = require('loglevel');
+const ethUtil = require('ethereumjs-util');
 
-const { EventEmitter } = require('events')
-const log = require('loglevel')
-const ethUtil = require('ethereumjs-util')
+const { BN } = ethUtil;
+const bip39 = require('bip39');
+const ObservableStore = require('obs-store');
+const encryptor = require('browser-passworder');
+const { normalize: normalizeAddress } = require('eth-sig-util');
 
-const { BN } = ethUtil
-const bip39 = require('bip39')
-const ObservableStore = require('obs-store')
-const encryptor = require('browser-passworder')
-const { normalize: normalizeAddress } = require('eth-sig-util')
+const SimpleKeyring = require('eth-simple-keyring');
+const HdKeyring = require('eth-hd-keyring');
 
-const SimpleKeyring = require('eth-simple-keyring')
-const HdKeyring = require('eth-hd-keyring')
-
-const keyringTypes = [
-  SimpleKeyring,
-  HdKeyring,
-]
+const keyringTypes = [SimpleKeyring, HdKeyring];
 
 class KeyringController extends EventEmitter {
   //
@@ -121,7 +117,7 @@ class KeyringController extends EventEmitter {
 
   /**
    * Set Locked
-   * This method deallocates all secrets, and effectively locks OneKey.
+   * This method deallocates all secrets, and effectively locks MetaMask.
    *
    * @emits KeyringController#lock
    * @returns {Promise<Object>} A Promise that resolves to the state.
@@ -144,7 +140,7 @@ class KeyringController extends EventEmitter {
    * into memory.
    *
    * Temporarily also migrates any old-style vaults first, as well.
-   * (Pre OneKey 3.0.0)
+   * (Pre MetaMask 3.0.0)
    *
    * @emits KeyringController#unlock
    * @param {string} password - The keyring controller password.
@@ -739,29 +735,6 @@ class KeyringController extends EventEmitter {
     this.memStore.updateState({ isUnlocked: true });
     this.emit('unlock');
   }
-
-  changePassword(oldPassword, password) {
-    const ensureKeyringsExists = () => {
-      if (!this.keyrings || !this.keyrings.length) {
-        throw new Error('Keyrings is empty, password change is not allowed.');
-      }
-    };
-    if (!password) {
-      throw new Error('New password can not be empty');
-    }
-    ensureKeyringsExists();
-
-    return this.verifyPassword(oldPassword)
-      .then(() => {
-        ensureKeyringsExists();
-        // should return persistAllKeyrings, otherwise new password will lost
-        return this.persistAllKeyrings(password);
-      })
-      .then(this.setUnlocked.bind(this))
-      .then(this.fullUpdate.bind(this))
-      .then(this.setLocked.bind(this))
-      .then(() => true);
-  }
 }
 
-module.exports = KeyringController
+module.exports = KeyringController;
