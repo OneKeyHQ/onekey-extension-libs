@@ -338,21 +338,36 @@
   resolved "https://registry.npmjs.org/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz#af577b477c683fad17c619a78208cede06f9605c"
   integrity sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==
 
-"@onekeyhq/contract-metadata@^1.28.0":
-  version "1.28.0"
-  resolved "https://npm.pkg.github.com/download/@onekeyhq/contract-metadata/1.28.0/592b746d57a485b93ea645dd95074a2c82fcf43fb711f112ccef9ac03757bbb8#21d3ce5ce4f1d5d6f2fb20a692d23440220b0c26"
-  integrity sha512-J6sDpMxJs3jZ7RhoFxkzsf15ZLe/kHy+KMPkRkQuU95G0+mhnU5g0gf9e3Oz9E4CZjBlGscBANaAca/7Ha05Nw==
+"@onekeyhq/contract-metadata@^1.28.1":
+  version "1.28.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/contract-metadata/1.28.1/967728d61e40aeea71b93fe24425194f12495914b9bd3e25797479c819cd0982#ff9f24b646e06d2966e6ae29039b3a622573f251"
+  integrity sha512-O87TZTRweEqI2SoJctwRA+wH7PIai9lfw9nhAQ1miWFJk2AFQcoaw6ctlS3o3ZFL8YNtGVtmom5UAl2dEvHoMA==
 
-"@onekeyhq/extension-controllers@^5.1.0":
-  version "5.1.0"
-  resolved "https://npm.pkg.github.com/download/@onekeyhq/extension-controllers/5.1.0/d817f45be2268e3149f5d3c85f14da18243cb517a2798c0eb28c29cb1b455af5#73931d2d11bcaa3be475c7b6cf47df737238a556"
-  integrity sha512-NpvKxRaWry0nqI60nQDxdYL+T6Eld+Z1LNGVxJnanIX38hRLMwbZpluAWEdRPQUYVLnPUmzUJHiH6ohg46bsog==
+"@onekeyhq/eth-keyring-controller@^6.1.1":
+  version "6.1.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/eth-keyring-controller/6.1.1/01440684e1cfbedf51d903e6296df5d76700dec311dc8785f32450c61b97fdb8#ec2b96925b4723097439622b85b24a02a795f637"
+  integrity sha512-X5wYzhcVbet8B7ZMNiMUqY4jdWOawKIsWNt+rfFDNfHejjm5Gm+P6+JPlzVXSRoWd/oSTjpz6q4aacRLcgdQJw==
   dependencies:
-    "@onekeyhq/contract-metadata" "^1.28.0"
+    bip39 "^2.4.0"
+    bluebird "^3.5.0"
+    browser-passworder "^2.0.3"
+    eth-hd-keyring "^3.5.0"
+    eth-sig-util "^1.4.0"
+    eth-simple-keyring "^3.5.0"
+    ethereumjs-util "^5.1.2"
+    loglevel "^1.5.0"
+    obs-store "^4.0.3"
+
+"@onekeyhq/extension-controllers@^5.1.1":
+  version "5.1.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/extension-controllers/5.1.1/7ef23d96788f701340a5e5438ad1225c867e71e14edab7979eba24be7567e78f#c3267d823b53104828693785faf40829ecdd15aa"
+  integrity sha512-B1Q3sns09ZiBX9agGAweBX3eKZhgW3uArnVPJXjqYv67V6iG2Kj1Cx5noTR5vRH3kvULHH+78WfUVheFMY0H8g==
+  dependencies:
+    "@onekeyhq/contract-metadata" "^1.28.1"
+    "@onekeyhq/eth-keyring-controller" "^6.1.1"
     await-semaphore "^0.1.3"
     eth-ens-namehash "^2.0.8"
     eth-json-rpc-infura "^5.1.0"
-    eth-keyring-controller "^6.1.0"
     eth-method-registry "1.1.0"
     eth-phishing-detect "^1.1.13"
     eth-query "^2.1.2"
@@ -1327,7 +1342,7 @@ eth-ens-namehash@^2.0.8:
     idna-uts46-hx "^2.3.1"
     js-sha3 "^0.5.7"
 
-eth-hd-keyring@^3.6.0:
+eth-hd-keyring@^3.5.0:
   version "3.6.0"
   resolved "https://registry.npmjs.org/eth-hd-keyring/-/eth-hd-keyring-3.6.0.tgz#6835d30aa411b8d3ef098e82f6427b5325082abb"
   integrity sha512-n2CwE9VNXsxLrXQa6suv0Umt4NT6+HtoahKgWx3YviXx4rQFwVT5nDwZfjhwrT31ESuoXYNIeJgz5hKLD96QeQ==
@@ -1377,21 +1392,6 @@ eth-json-rpc-middleware@^6.0.0:
     pify "^3.0.0"
     safe-event-emitter "^1.0.1"
 
-eth-keyring-controller@^6.1.0:
-  version "6.2.1"
-  resolved "https://registry.npmjs.org/eth-keyring-controller/-/eth-keyring-controller-6.2.1.tgz#61901071fc74059ed37cb5ae93870fdcae6e3781"
-  integrity sha512-x2gTM1iHp2Kbvdtd9Eslysw0qzVZiqOzpVB3AU/ni2Xiit+rlcv2H80zYKjrEwlfWFDj4YILD3bOqlnEMmRJOA==
-  dependencies:
-    bip39 "^2.4.0"
-    bluebird "^3.5.0"
-    browser-passworder "^2.0.3"
-    eth-hd-keyring "^3.6.0"
-    eth-sig-util "^3.0.1"
-    eth-simple-keyring "^4.2.0"
-    ethereumjs-util "^7.0.9"
-    loglevel "^1.5.0"
-    obs-store "^4.0.3"
-
 eth-method-registry@1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/eth-method-registry/-/eth-method-registry-1.1.0.tgz#3cc01bd23dcf513428d14a0bb19910652cc5cac0"
@@ -1428,13 +1428,23 @@ eth-rpc-errors@^4.0.0, eth-rpc-errors@^4.0.2:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
-eth-sig-util@^1.4.2:
+eth-sig-util@^1.4.0, eth-sig-util@^1.4.2:
   version "1.4.2"
   resolved "https://registry.npmjs.org/eth-sig-util/-/eth-sig-util-1.4.2.tgz#8d958202c7edbaae839707fba6f09ff327606210"
   integrity sha1-jZWCAsftuq6Dlwf7pvCf8ydgYhA=
   dependencies:
     ethereumjs-abi "git+https://github.com/ethereumjs/ethereumjs-abi.git"
     ethereumjs-util "^5.1.1"
+
+eth-sig-util@^2.5.0:
+  version "2.5.4"
+  resolved "https://registry.npmjs.org/eth-sig-util/-/eth-sig-util-2.5.4.tgz#577b01fe491b6bf59b0464be09633e20c1677bc5"
+  integrity sha512-aCMBwp8q/4wrW4QLsF/HYBOSA7TpLKmkVwP3pYQNkEEseW2Rr8Z5Uxc9/h6HX+OG3tuHo+2bINVSihIeBfym6A==
+  dependencies:
+    ethereumjs-abi "0.6.8"
+    ethereumjs-util "^5.1.1"
+    tweetnacl "^1.0.3"
+    tweetnacl-util "^0.15.0"
 
 eth-sig-util@^3.0.0, eth-sig-util@^3.0.1:
   version "3.0.1"
@@ -1445,6 +1455,18 @@ eth-sig-util@^3.0.0, eth-sig-util@^3.0.1:
     ethereumjs-util "^5.1.1"
     tweetnacl "^1.0.3"
     tweetnacl-util "^0.15.0"
+
+eth-simple-keyring@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/eth-simple-keyring/-/eth-simple-keyring-3.5.0.tgz#c7fa285ca58d31ef44bc7db678b689f9ffd7b453"
+  integrity sha512-z9IPt9aoMWAw5Zc3Jk/HKbWPJNc7ivZ5ECNtl3ZoQUGRnwoWO71W5+liVPJtXFNacGOOGsBfqTqrXL9C4EnYYQ==
+  dependencies:
+    eth-sig-util "^2.5.0"
+    ethereumjs-abi "^0.6.5"
+    ethereumjs-util "^5.1.1"
+    ethereumjs-wallet "^0.6.0"
+    events "^1.1.1"
+    xtend "^4.0.1"
 
 eth-simple-keyring@^4.2.0:
   version "4.2.0"
@@ -1487,7 +1509,7 @@ ethereum-cryptography@^0.1.3:
     secp256k1 "^4.0.1"
     setimmediate "^1.0.5"
 
-ethereumjs-abi@^0.6.8:
+ethereumjs-abi@0.6.8, ethereumjs-abi@^0.6.5, ethereumjs-abi@^0.6.8:
   version "0.6.8"
   resolved "https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz#71bc152db099f70e62f108b7cdfca1b362c6fcae"
   integrity sha512-Tx0r/iXI6r+lRsdvkFDlut0N08jWMnKRZ6Gkq+Nmw75lZe4e6o3EkSnkaBP5NF6+m5PTGAr9JP43N3LyeoglsA==
@@ -1609,7 +1631,7 @@ ethereumjs-vm@^2.3.4:
     rustbn.js "~0.2.0"
     safe-buffer "^5.1.1"
 
-ethereumjs-wallet@^0.6.4:
+ethereumjs-wallet@^0.6.0, ethereumjs-wallet@^0.6.4:
   version "0.6.5"
   resolved "https://registry.npmjs.org/ethereumjs-wallet/-/ethereumjs-wallet-0.6.5.tgz#685e9091645cee230ad125c007658833991ed474"
   integrity sha512-MDwjwB9VQVnpp/Dc1XzA6J1a3wgHQ4hSvA1uWNatdpOrtCbPVuQSKSyRnjLvS0a+KKMw2pvQ9Ybqpb3+eW8oNA==

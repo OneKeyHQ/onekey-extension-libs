@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/contract-metadata",
-  "version": "1.28.0",
+  "version": "1.28.1",
   "description": "A mapping of ethereum contract addresses to broadly accepted icons for those addresses.",
   "main": "index.js",
   "publishConfig": {

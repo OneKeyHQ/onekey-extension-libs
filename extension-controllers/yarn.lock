@@ -646,10 +646,25 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@onekeyhq/contract-metadata@^1.28.0":
-  version "1.28.0"
-  resolved "https://npm.pkg.github.com/download/@onekeyhq/contract-metadata/1.28.0/c0596a559a47479841ef568ba3f75ad49b606bf37f2863e3797d8f61d8de7dff#69c8297c94ed16a43da0688c95cfd0dc87a74ac7"
-  integrity sha512-oM2ot+vWtX+Pva1cM1LWEqX8EpblMmvfXZKEdYJDxHUL8ndJpcoksICcJKibYqqtxyDTjrhHFtNVQDchEp0FPg==
+"@onekeyhq/contract-metadata@^1.28.1":
+  version "1.28.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/contract-metadata/1.28.1/967728d61e40aeea71b93fe24425194f12495914b9bd3e25797479c819cd0982#ff9f24b646e06d2966e6ae29039b3a622573f251"
+  integrity sha512-O87TZTRweEqI2SoJctwRA+wH7PIai9lfw9nhAQ1miWFJk2AFQcoaw6ctlS3o3ZFL8YNtGVtmom5UAl2dEvHoMA==
+
+"@onekeyhq/eth-keyring-controller@^6.1.1":
+  version "6.1.1"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/eth-keyring-controller/6.1.1/01440684e1cfbedf51d903e6296df5d76700dec311dc8785f32450c61b97fdb8#ec2b96925b4723097439622b85b24a02a795f637"
+  integrity sha512-X5wYzhcVbet8B7ZMNiMUqY4jdWOawKIsWNt+rfFDNfHejjm5Gm+P6+JPlzVXSRoWd/oSTjpz6q4aacRLcgdQJw==
+  dependencies:
+    bip39 "^2.4.0"
+    bluebird "^3.5.0"
+    browser-passworder "^2.0.3"
+    eth-hd-keyring "^3.5.0"
+    eth-sig-util "^1.4.0"
+    eth-simple-keyring "^3.5.0"
+    ethereumjs-util "^5.1.2"
+    loglevel "^1.5.0"
+    obs-store "^4.0.3"
 
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.0.2", "@sinonjs/commons@^1.4.0":
   version "1.4.0"
@@ -2489,21 +2504,6 @@ eth-json-rpc-middleware@^6.0.0:
     node-fetch "^2.6.1"
     pify "^3.0.0"
     safe-event-emitter "^1.0.1"
-
-eth-keyring-controller@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/eth-keyring-controller/-/eth-keyring-controller-6.1.0.tgz#dc9313d0b793e085dc1badf84dd4f5e3004e127e"
-  integrity sha512-wPxH++98VDBcDv9YkPzxhZC0gF1ixuRbyKR2u/NOT/roBpNQDe4reqyllBRC7jhPehiKnRxzf7r6HEyirRnPxQ==
-  dependencies:
-    bip39 "^2.4.0"
-    bluebird "^3.5.0"
-    browser-passworder "^2.0.3"
-    eth-hd-keyring "^3.5.0"
-    eth-sig-util "^1.4.0"
-    eth-simple-keyring "^3.5.0"
-    ethereumjs-util "^5.1.2"
-    loglevel "^1.5.0"
-    obs-store "^4.0.3"
 
 eth-method-registry@1.1.0:
   version "1.1.0"

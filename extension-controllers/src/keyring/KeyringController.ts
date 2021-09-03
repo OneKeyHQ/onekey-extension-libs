@@ -11,7 +11,7 @@ import { Transaction } from '../transaction/TransactionController';
 import { PersonalMessageParams } from '../message-manager/PersonalMessageManager';
 import { TypedMessageParams } from '../message-manager/TypedMessageManager';
 
-const Keyring = require('eth-keyring-controller');
+const Keyring = require('@onekeyhq/eth-keyring-controller');
 const { Mutex } = require('await-semaphore');
 const Wallet = require('ethereumjs-wallet');
 const ethUtil = require('ethereumjs-util');
