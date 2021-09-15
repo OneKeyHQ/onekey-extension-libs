@@ -14,6 +14,7 @@ const TREZOR_CONNECT_MANIFEST = {
   appUrl: 'https://www.onekey.so',
 }
 class TrezorKeyring extends EventEmitter {
+
   constructor (opts = {}) {
     super()
     this.type = keyringType
@@ -24,7 +25,7 @@ class TrezorKeyring extends EventEmitter {
     this.unlockedAccount = 0
     this.paths = {}
     this.deserialize(opts)
-    TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST)
+    // TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST)
   }
 
   serialize () {
@@ -255,9 +256,79 @@ class TrezorKeyring extends EventEmitter {
     })
   }
 
-  signTypedData () {
+  // check eth-simple-keyring signTypedData (withAccount, typedData, opts = { version: 'V1' }) 
+  // https://github.com/MetaMask/eth-sig-util/blob/89c9f91018ff755cefa2d71182426f3659c63a77/src/index.ts#L339
+  signTypedData (address, data, opts) {
+    // TypedDataUtils.eip712Hash(msgParams.data, version)
+    const { version = 'V1' } = opts;
+    switch (opts.version) {
+      case 'V1':
+        return this.signTypedData_v1(address, data, opts);
+      case 'V3':
+        return this.signTypedData_v3_v4(address, data, opts);
+      case 'V4':
+        return this.signTypedData_v3_v4(address, data, opts);
+      default:
+        return this.signTypedData_v1(address, data, opts);
+    }
+  }
+
+  signTypedData_v1 (address, typedData, opts = {}) {
     // Waiting on trezor to enable this
-    return Promise.reject(new Error('Not supported on this device'))
+    return Promise.reject(new Error('signTypedData_v1 Not supported on this device'));
+  }
+
+  // personal_signTypedData, signs data along with the schema
+  signTypedData_v3_v4 (address, typedData, opts = {}) {
+    return new Promise((resolve, reject) => {
+      const { version = 'V1' } = opts;
+      this.unlock()
+        .then((status) => {
+          setTimeout((_) => {
+            try {
+              TrezorConnect.ethereumSignMessageEIP712({
+                path: this._pathFromAddress(address),
+                version,
+                data: typedData,
+              }).then((response) => {
+                if (response.success) {
+                  if (response.payload.address !== ethUtil.toChecksumAddress(address)) {
+                    reject(new Error('signature doesnt match the right address'))
+                  }
+                  const signature = `0x${response.payload.signature}`
+                  resolve(signature)
+                } else {
+                  let code = (response.payload && response.payload.code) || '';
+                  const message  = (response.payload && response.payload.error) || '';
+                  if (message.includes('EIP712Domain')) {
+                    code='EIP712_DOMAIN_NOT_SUPPORT'
+                  } else if (message.includes('EIP712')) {
+                    code='EIP712_BLIND_SIGN_DISABLED'
+                  }
+                  if (code==='Failure_UnexpectedMessage') {
+                    code='EIP712_FIRMWARE_NOT_SUPPORT'
+                  }
+                  const errorCodeI18n = 'connect__ethereumSignMessageEIP712__error__'
+                                          + (code || 'Unknown');
+                  const error = new Error((response.payload && response.payload.error) || 'Unknown error')
+                  error.errorCodeI18n = errorCodeI18n;
+                  reject(error)
+                }
+              }).catch((e) => {
+                console.log('Error while trying to sign a message ', e)
+                reject(new Error((e && e.toString()) || 'Unknown error'))
+              })
+            } catch (e) {
+              reject(new Error((e && e.toString()) || 'Unknown error'))
+            }
+            // This is necessary to avoid popup collision
+            // between the unlock & sign trezor popups
+          }, status === 'just unlocked' ? DELAY_BETWEEN_POPUPS : 0)
+        }).catch((e) => {
+          console.log('Error while trying to sign a message ', e)
+          reject(new Error((e && e.toString()) || 'Unknown error'))
+        })
+    })
   }
 
   exportAccount () {
@@ -307,4 +378,6 @@ class TrezorKeyring extends EventEmitter {
 }
 
 TrezorKeyring.type = keyringType
+TrezorKeyring.connect = TrezorConnect
+
 module.exports = TrezorKeyring
