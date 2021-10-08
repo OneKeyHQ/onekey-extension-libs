@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/eth-onekey-keyring",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A OneKey compatible keyring, for onekey hardware wallets",
   "files": [
     "index.js"

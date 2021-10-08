@@ -256,7 +256,7 @@ class TrezorKeyring extends EventEmitter {
     })
   }
 
-  // check eth-simple-keyring signTypedData (withAccount, typedData, opts = { version: 'V1' }) 
+  // check eth-simple-keyring signTypedData (withAccount, typedData, opts = { version: 'V1' })
   // https://github.com/MetaMask/eth-sig-util/blob/89c9f91018ff755cefa2d71182426f3659c63a77/src/index.ts#L339
   signTypedData (address, data, opts) {
     // TypedDataUtils.eip712Hash(msgParams.data, version)
@@ -275,7 +275,7 @@ class TrezorKeyring extends EventEmitter {
 
   signTypedData_v1 (address, typedData, opts = {}) {
     // Waiting on trezor to enable this
-    return Promise.reject(new Error('signTypedData_v1 Not supported on this device'));
+    return Promise.reject(new Error('Not supported on this device'));
   }
 
   // personal_signTypedData, signs data along with the schema
@@ -300,18 +300,25 @@ class TrezorKeyring extends EventEmitter {
                 } else {
                   let code = (response.payload && response.payload.code) || '';
                   const message  = (response.payload && response.payload.error) || '';
+                  let errorMsg = (response.payload && response.payload.error) || 'Unknown error';
+
+                  let errorUrl = '';
                   if (message.includes('EIP712Domain')) {
                     code='EIP712_DOMAIN_NOT_SUPPORT'
                   } else if (message.includes('EIP712')) {
                     code='EIP712_BLIND_SIGN_DISABLED'
+                    errorUrl = 'https://help.onekey.so/hc/zh-cn/articles/4406637762959'
                   }
                   if (code==='Failure_UnexpectedMessage') {
                     code='EIP712_FIRMWARE_NOT_SUPPORT'
+                    errorMsg='Not supported on this device'
                   }
                   const errorCodeI18n = 'connect__ethereumSignMessageEIP712__error__'
                                           + (code || 'Unknown');
-                  const error = new Error((response.payload && response.payload.error) || 'Unknown error')
+
+                  const error = new Error(errorMsg)
                   error.errorCodeI18n = errorCodeI18n;
+                  error.errorUrl = errorUrl;
                   reject(error)
                 }
               }).catch((e) => {
