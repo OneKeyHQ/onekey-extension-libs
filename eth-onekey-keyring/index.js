@@ -25,6 +25,7 @@ class TrezorKeyring extends EventEmitter {
     this.unlockedAccount = 0
     this.paths = {}
     this.deserialize(opts)
+    // DO NOT init manifest here, let the Application layer call OneKeyKeyring.connect.init() instead.
     // TrezorConnect.manifest(TREZOR_CONNECT_MANIFEST)
   }
 
