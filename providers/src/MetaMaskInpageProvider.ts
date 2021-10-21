@@ -417,8 +417,9 @@ export default class MetaMaskInpageProvider extends BaseProvider {
   protected _handleChainChanged({
     chainId,
     networkVersion,
-  }: { chainId?: string; networkVersion?: string } = {}) {
-    super._handleChainChanged({ chainId, networkVersion });
+    chainKey,
+  }: { chainId?: string; networkVersion?: string; chainKey?: string; } = {}) {
+    super._handleChainChanged({ chainId, networkVersion, chainKey });
 
     if (
       networkVersion &&

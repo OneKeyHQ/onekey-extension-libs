@@ -31,9 +31,14 @@ export interface UnvalidatedJsonRpcRequest {
   jsonrpc?: JsonRpcVersion;
   method: string;
   params?: unknown;
+  chainId?: number|string|null;
+  baseChain?: string|null;
+  chainKey?: string|null;
 }
 
 export interface BaseProviderOptions {
+  baseChain?: string | null;
+
   /**
    * The name of the stream used to connect to the wallet.
    */
@@ -64,6 +69,7 @@ export interface BaseProviderState {
   isUnlocked: boolean;
   initialized: boolean;
   isPermanentlyDisconnected: boolean;
+  jsonRpcStreamName?: string;
 }
 
 export interface JsonRpcConnection {
@@ -94,6 +100,9 @@ export default class BaseProvider extends SafeEventEmitter {
    * See [chainId.network]{@link https://chainid.network} for more information.
    */
   public chainId: string | null;
+  public baseChain?: string | null;
+  public chainKey?: string | null;
+  public streamName?: string | null;
 
   /**
    * The user's currently selected Ethereum address.
@@ -114,6 +123,7 @@ export default class BaseProvider extends SafeEventEmitter {
   constructor(
     connectionStream: Duplex,
     {
+      baseChain,
       jsonRpcStreamName = 'metamask-provider',
       logger = console,
       maxEventListeners = 100,
@@ -131,12 +141,15 @@ export default class BaseProvider extends SafeEventEmitter {
 
     // private state
     this._state = {
+      jsonRpcStreamName,
       ...BaseProvider._defaultState,
     };
 
     // public state
     this.selectedAddress = null;
     this.chainId = null;
+    this.streamName = jsonRpcStreamName;
+    this.baseChain = baseChain;
 
     // bind functions (to prevent consumers from making unbound calls)
     this._handleAccountsChanged = this._handleAccountsChanged.bind(this);
@@ -185,14 +198,22 @@ export default class BaseProvider extends SafeEventEmitter {
 
     // handle JSON-RPC notifications
     this._jsonRpcConnection.events.on('notification', (payload) => {
-      const { method, params } = payload;
+      const { method, params, streamName } = payload;
+      // console.log((streamName||'')+' @onekeyhq/providers.BaseProvider on notification '+(logIndex++));
+      // console.log('  ',payload);
+      if (streamName && this.streamName && streamName !== this.streamName) {
+        return;
+      }
+
       if (method === 'metamask_accountsChanged') {
         this._handleAccountsChanged(params);
       } else if (method === 'metamask_unlockStateChanged') {
         this._handleUnlockStateChanged(params);
       } else if (method === 'metamask_chainChanged' && this.selectedAddress) {
         this._handleChainChanged(params);
-      } else if (EMITTED_NOTIFICATIONS.includes(method)) {
+      }
+      // eth_subscription
+      else if (EMITTED_NOTIFICATIONS.includes(method)) {
         this.emit('message', {
           type: method,
           data: params,
@@ -278,6 +299,7 @@ export default class BaseProvider extends SafeEventEmitter {
         chainId,
         isUnlocked,
         networkVersion,
+        chainKey,
       } = (await this.request({
         method: 'metamask_getProviderState',
       })) as {
@@ -285,12 +307,13 @@ export default class BaseProvider extends SafeEventEmitter {
         chainId: string;
         isUnlocked: boolean;
         networkVersion: string;
+        chainKey?: string;
       };
 
       // indicate that we've connected, for EIP-1193 compliance
       this.emit('connect', { chainId });
 
-      this._handleChainChanged({ chainId, networkVersion });
+      this._handleChainChanged({ chainId, networkVersion, chainKey });
       this._handleUnlockStateChanged({ accounts, isUnlocked });
       this._handleAccountsChanged(accounts);
     } catch (error) {
@@ -301,6 +324,9 @@ export default class BaseProvider extends SafeEventEmitter {
     } finally {
       this._state.initialized = true;
       this.emit('_initialized');
+      if( this._state && this._state.accounts ){
+        this.emit('accountsChanged', this._state.accounts);
+      }
     }
   }
 
@@ -322,9 +348,16 @@ export default class BaseProvider extends SafeEventEmitter {
         payload.jsonrpc = '2.0';
       }
 
+      payload.chainId = payload.chainId || this.chainId;
+      payload.baseChain = this.baseChain;
+      payload.chainKey = this.chainKey;
+      payload.params = payload.params || {};
+
       if (
         payload.method === 'eth_accounts' ||
-        payload.method === 'eth_requestAccounts'
+        payload.method === 'eth_requestAccounts'||
+        payload.method === 'cfx_accounts' ||
+        payload.method === 'cfx_requestAccounts' 
       ) {
         // handle accounts changing
         cb = (err: Error, res: JsonRpcSuccess<string[]>) => {
@@ -421,7 +454,8 @@ export default class BaseProvider extends SafeEventEmitter {
   protected _handleChainChanged({
     chainId,
     networkVersion,
-  }: { chainId?: string; networkVersion?: string } = {}) {
+    chainKey,
+  }: { chainId?: string; networkVersion?: string; chainKey?: string; } = {}) {
     if (
       !chainId ||
       typeof chainId !== 'string' ||
@@ -440,7 +474,9 @@ export default class BaseProvider extends SafeEventEmitter {
       this._handleDisconnect(true);
     } else {
       this._handleConnect(chainId);
-
+      if (chainKey !== this.chainKey) {
+        this.chainKey = chainKey;
+      }
       if (chainId !== this.chainId) {
         this.chainId = chainId;
         if (this._state.initialized) {
