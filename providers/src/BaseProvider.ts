@@ -324,8 +324,10 @@ export default class BaseProvider extends SafeEventEmitter {
     } finally {
       this._state.initialized = true;
       this.emit('_initialized');
+      
+      // DO NOT emit any other events here, as some dapps will register reload page event handler
       if( this._state && this._state.accounts ){
-        this.emit('accountsChanged', this._state.accounts);
+        // this.emit('accountsChanged', this._state.accounts);
       }
     }
   }
@@ -541,6 +543,13 @@ export default class BaseProvider extends SafeEventEmitter {
       // finally, after all state has been updated, emit the event
       if (this._state.initialized) {
         this.emit('accountsChanged', _accounts);
+      } else {
+        // DO NOT emit any other events when provider NOT initialized
+        //       as some dapps will register reload page event handler
+        // Only works for CFX
+        if (this.baseChain === 'CFX') {
+            this.emit('accountsChanged', _accounts);
+        }
       }
     }
   }
