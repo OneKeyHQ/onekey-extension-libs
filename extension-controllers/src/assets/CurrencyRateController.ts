@@ -67,6 +67,14 @@ export class CurrencyRateController extends BaseController<CurrencyRateConfig, C
     );
   }
 
+  private getPricingURLOneKey(currentCurrency: string, nativeCurrency: string, includeUSDRate?: boolean) {
+    return (
+      `https://defi.onekey.so/onestep/api/v1/price?fsym=` +
+      `${nativeCurrency.toUpperCase()}&tsyms=${currentCurrency.toUpperCase()}` +
+      `${includeUSDRate && currentCurrency.toUpperCase() !== 'USD' ? ',USD' : ''}`
+    );
+  }
+
   /**
    * Name of this controller used during composition
    */
@@ -142,7 +150,11 @@ export class CurrencyRateController extends BaseController<CurrencyRateConfig, C
    * @returns - Promise resolving to exchange rate for given currency
    */
   async fetchExchangeRate(currency: string, nativeCurrency = this.activeNativeCurrency, includeUSDRate?: boolean): Promise<CurrencyRateState> {
-    const json = await handleFetch(this.getPricingURL(currency, nativeCurrency, includeUSDRate));
+    const res = await handleFetch(this.getPricingURLOneKey(currency, nativeCurrency, includeUSDRate));
+    let json = res.data;
+    if(!json || !json[currency.toUpperCase()]) {
+       json = await handleFetch(this.getPricingURL(currency, nativeCurrency, includeUSDRate));
+    }
     const conversionRate = Number(json[currency.toUpperCase()]);
     const usdConversionRate = Number(json.USD);
     if (!Number.isFinite(conversionRate)) {
