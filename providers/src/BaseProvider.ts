@@ -324,7 +324,7 @@ export default class BaseProvider extends SafeEventEmitter {
     } finally {
       this._state.initialized = true;
       this.emit('_initialized');
-      
+
       // DO NOT emit any other events here, as some dapps will register reload page event handler
       if( this._state && this._state.accounts ){
         // this.emit('accountsChanged', this._state.accounts);
@@ -353,13 +353,15 @@ export default class BaseProvider extends SafeEventEmitter {
       payload.chainId = payload.chainId || this.chainId;
       payload.baseChain = this.baseChain;
       payload.chainKey = this.chainKey;
-      payload.params = payload.params || {};
+      // DO NOT set default params {} or [] here, some RPC needs array type, some needs object type
+      //    ex: https://forno.celo.org/
+      payload.params = payload.params || undefined;
 
       if (
         payload.method === 'eth_accounts' ||
         payload.method === 'eth_requestAccounts'||
         payload.method === 'cfx_accounts' ||
-        payload.method === 'cfx_requestAccounts' 
+        payload.method === 'cfx_requestAccounts'
       ) {
         // handle accounts changing
         cb = (err: Error, res: JsonRpcSuccess<string[]>) => {
