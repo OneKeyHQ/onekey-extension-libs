@@ -9,7 +9,7 @@ const sinon = require('sinon')
 
 const EthereumTx = require('ethereumjs-tx')
 const HDKey = require('hdkey')
-const TrezorConnect = require('@onekeyhq/connect').default
+const TrezorConnect = require('@onekeyfe/connect').default
 
 const TrezorKeyring = require('..')
 

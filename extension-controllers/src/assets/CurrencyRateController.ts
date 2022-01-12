@@ -150,7 +150,8 @@ export class CurrencyRateController extends BaseController<CurrencyRateConfig, C
    * @returns - Promise resolving to exchange rate for given currency
    */
   async fetchExchangeRate(currency: string, nativeCurrency = this.activeNativeCurrency, includeUSDRate?: boolean): Promise<CurrencyRateState> {
-    let json = await handleFetch(this.getPricingURLOneKey(currency, nativeCurrency, includeUSDRate));
+	const res = await handleFetch(this.getPricingURLOneKey(currency, nativeCurrency, includeUSDRate));
+	let json = res.data;
     if(!json || !json[currency.toUpperCase()]) {
        json = await handleFetch(this.getPricingURL(currency, nativeCurrency, includeUSDRate));
     }

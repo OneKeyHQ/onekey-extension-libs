@@ -2,7 +2,7 @@ const { EventEmitter } = require('events')
 const ethUtil = require('ethereumjs-util')
 const Transaction = require('ethereumjs-tx')
 const HDKey = require('hdkey')
-const TrezorConnect = require('@onekeyhq/connect').default
+const TrezorConnect = require('@onekeyfe/connect').default
 
 const hdPathString = `m/44'/60'/0'/0`
 const keyringType = 'Trezor Hardware'
