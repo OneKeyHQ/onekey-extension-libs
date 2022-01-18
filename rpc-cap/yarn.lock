@@ -358,10 +358,10 @@
     loglevel "^1.5.0"
     obs-store "^4.0.3"
 
-"@onekeyhq/extension-controllers@^5.1.2":
-  version "5.1.3"
-  resolved "https://npm.pkg.github.com/download/@onekeyhq/extension-controllers/5.1.3/ef8b8a1f098944e8e051484cdf449d8f9cff0d190fc59df9006019bb1e73b073#b89bc4d5895e8e4b4ec6d36be0080600db9298bb"
-  integrity sha512-0tP8N0U0TMzfUxp+ZENbpVtakSS2WJndKwOq5yWyF21Qgmp1ItFRVjJeL02hsNBnoGzVYz6cZyTSF3tXWDK9Ew==
+"@onekeyhq/extension-controllers@^5.1.5":
+  version "5.1.5"
+  resolved "https://npm.pkg.github.com/download/@onekeyhq/extension-controllers/5.1.5/d2b3a3a18fc3d75f6735f9fd1c9a82d70493c3c82ad54dbc7d398a9ae2450435#7a6301d57e53cbf920b5502726e05fc02e6d50d5"
+  integrity sha512-e/tXXwWAcwaHPaA770ltXaOqr/ri28fkSZaEzlJ+dFFvOvbtwBU93Ef5Ux/okqWMLp3ymYktPZuRHMbHhRcj7Q==
   dependencies:
     "@onekeyhq/contract-metadata" "^1.28.1"
     "@onekeyhq/eth-keyring-controller" "^6.1.1"
